@@ -8,37 +8,63 @@ let cuentaOpc3 = 0;
 let cuentaOpc4 = 0;
 let cuentaOpc5 = 0;
 console.log("entro aqui");
-while (opcionBienvenida != 9) {
-    opcionBienvenida = parseInt(prompt("Bienvenido a su restaurante-Bar \n seleccione la opcion que desea realizar\n 1.Agregar al pedido\n 2.Confirmar pedido \n 3.Modificar pedido\n 9.salir"));
-    console.log(opcionBienvenida);
-    switch (opcionBienvenida) {
-        case 1:
-            agregarPedido();
-            break;
-        case 2:
-            confirmaPedido = confirmarPedido();
-            break;
-        case 3:
+// while (opcionBienvenida != 9) {
+//     opcionBienvenida = 0;
+//     console.log(opcionBienvenida);
+//     opcionBienvenida = parseInt(prompt("Bienvenido a su restaurante-Bar \n seleccione la opcion que desea realizar\n 1.Agregar al pedido\n 2.Confirmar pedido \n 3.Modificar pedido\n 9.salir"));
+//     console.log(opcionBienvenida);
+//     switch (opcionBienvenida) {
+//         case 1:
+//             agregarPedido();
+//             break;
+//         case 2:
+//             confirmaPedido = confirmarPedido();
+//             break;
+//         case 3:
 
-            break;
+//             break;
 
-        default:
-            break;
-    }
+//         default:
+//             alert("estimado usuari@ por favor Seleccione una opcion valida");
+//             break;
+//     }
 
-    if (confirmaPedido) {
-        break;
-    }
-}
-
+//     if (confirmaPedido) {
+//         break;
+//     }
+// }
+menuInicial();
 if (confirmaPedido) {
-    alert("Su pedido se confirmo correctamente el valor a pagar es de $" + valorPagar +" COP" );
+    alert("Su pedido se confirmo correctamente el valor a pagar es de $" + valorPagar + " COP");
 } else {
     alert("Gracias por utilizar nuestros servicios");
 }
 
 
+function menuInicial() {
+    while (opcionBienvenida !== 9) {
+        opcionBienvenida = parseInt(prompt("Bienvenido a su restaurante-Bar \n seleccione la opcion que desea realizar\n 1.Agregar al pedido\n 2.Confirmar pedido \n 3.Modificar pedido\n 9.salir"));
+        switch (opcionBienvenida) {
+            case 1:
+                agregarPedido();
+                break;
+            case 2:
+                confirmaPedido = confirmarPedido();
+                break;
+            case 3:
+                break;
+            default:
+                if (opcionBienvenida !== 9) {
+                    alert("estimado usuari@ por favor Seleccione una opcion valida");
+                }
+                break;
+        }
 
+        if (confirmaPedido) {
+            break;
+        }
+    }
+}
 
 function agregarPedido() {
 
@@ -72,6 +98,8 @@ function agregarPedido() {
             cuentaOpc5 = cuentaOpc5++;
             break;
         default:
+            alert("estimado usuari@ por favor Seleccione una opcion valida");
+            agregarPedido();
             break;
     }
 
@@ -79,13 +107,30 @@ function agregarPedido() {
 
 function confirmarPedido() {
     let _confirmoPedido = false;
-    let opcionConfirmar = parseInt(prompt("El total a pagar es de " + valorPagar +
-        "\n Desea confirmar el pedido \n" +
-        "1.Si \n" +
-        "2.No "));
-    if (opcionConfirmar === 1) {
-        _confirmoPedido = true;
+    let opcionConfirmar = 0;
+
+    while (!_confirmoPedido) {
+        opcionConfirmar = parseInt(prompt("El total a pagar es de " + valorPagar +
+            "\n Desea confirmar el pedido \n" +
+            "1.Si \n" +
+            "2.No "));
+        console.log("antes " + opcionConfirmar);
+        switch (opcionConfirmar) {
+            case 1:
+                console.log("ingreso confirmar 1");
+                _confirmoPedido = true;
+                break;
+            case 2:
+                _confirmoPedido = false;
+                break;
+            default:
+                console.log("default9 " + opcionConfirmar);
+                alert("estimado usuari@ por favor Seleccione una opcion valida");
+                break;
+        }
     }
+
+    console.log("confirmo pedido " + _confirmoPedido);
     return _confirmoPedido
 }
 

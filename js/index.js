@@ -102,6 +102,9 @@ function confirmarPedido() {
                 alert("estimado usuari@ por favor Seleccione una opcion valida");
                 break;
         }
+        if (opcionConfirmar === 2) {
+            break;
+        }
     }
 
     return _confirmoPedido

@@ -83,31 +83,36 @@ function agregarPedido() {
 function confirmarPedido() {
     let _confirmoPedido = false;
     let opcionConfirmar = 0;
+    if (valorPagar === 0) {
+        _confirmoPedido = false;
+        alert("estimado usuari@, usted no ha realizado ningun pedido aun");
+    } else {
+        while (!_confirmoPedido) {
+            opcionConfirmar = parseInt(prompt("El total a pagar es de " + valorPagar +
+                "\n Desea confirmar el pedido \n" +
+                "1.Si \n" +
+                "2.No "));
+            switch (opcionConfirmar) {
+                case 1:
+                    console.log("ingreso confirmar 1");
+                    _confirmoPedido = true;
+                    break;
+                case 2:
+                    _confirmoPedido = false;
+                    break;
+                default:
+                    console.log("default9 " + opcionConfirmar);
+                    alert("estimado usuari@ por favor Seleccione una opcion valida");
+                    break;
+            }
+            if (opcionConfirmar === 2) {
+                break;
+            }
+        }
 
-    while (!_confirmoPedido) {
-        opcionConfirmar = parseInt(prompt("El total a pagar es de " + valorPagar +
-            "\n Desea confirmar el pedido \n" +
-            "1.Si \n" +
-            "2.No "));
-        switch (opcionConfirmar) {
-            case 1:
-                console.log("ingreso confirmar 1");
-                _confirmoPedido = true;
-                break;
-            case 2:
-                _confirmoPedido = false;
-                break;
-            default:
-                console.log("default9 " + opcionConfirmar);
-                alert("estimado usuari@ por favor Seleccione una opcion valida");
-                break;
-        }
-        if (opcionConfirmar === 2) {
-            break;
-        }
+        return _confirmoPedido
     }
 
-    return _confirmoPedido
 }
 
 function sumarPedido(valorPedido) {

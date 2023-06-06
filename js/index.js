@@ -7,32 +7,7 @@ let cuentaOpc2 = 0;
 let cuentaOpc3 = 0;
 let cuentaOpc4 = 0;
 let cuentaOpc5 = 0;
-console.log("entro aqui");
-// while (opcionBienvenida != 9) {
-//     opcionBienvenida = 0;
-//     console.log(opcionBienvenida);
-//     opcionBienvenida = parseInt(prompt("Bienvenido a su restaurante-Bar \n seleccione la opcion que desea realizar\n 1.Agregar al pedido\n 2.Confirmar pedido \n 3.Modificar pedido\n 9.salir"));
-//     console.log(opcionBienvenida);
-//     switch (opcionBienvenida) {
-//         case 1:
-//             agregarPedido();
-//             break;
-//         case 2:
-//             confirmaPedido = confirmarPedido();
-//             break;
-//         case 3:
 
-//             break;
-
-//         default:
-//             alert("estimado usuari@ por favor Seleccione una opcion valida");
-//             break;
-//     }
-
-//     if (confirmaPedido) {
-//         break;
-//     }
-// }
 menuInicial();
 if (confirmaPedido) {
     alert("Su pedido se confirmo correctamente el valor a pagar es de $" + valorPagar + " COP");
@@ -114,7 +89,6 @@ function confirmarPedido() {
             "\n Desea confirmar el pedido \n" +
             "1.Si \n" +
             "2.No "));
-        console.log("antes " + opcionConfirmar);
         switch (opcionConfirmar) {
             case 1:
                 console.log("ingreso confirmar 1");
@@ -130,7 +104,6 @@ function confirmarPedido() {
         }
     }
 
-    console.log("confirmo pedido " + _confirmoPedido);
     return _confirmoPedido
 }
 

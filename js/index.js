@@ -1,12 +1,8 @@
 
 let opcionBienvenida = 0;
 let confirmaPedido = false;
-let valorPagar = 0;
-let cuentaOpc1 = 0;
-let cuentaOpc2 = 0;
-let cuentaOpc3 = 0;
-let cuentaOpc4 = 0;
-let cuentaOpc5 = 0;
+let cartaEntradas = '';
+let pedido = [];
 
 const cartaRestaurante = [
     { tipoProducto: "entrada", producto: "canasta de empanadas", precio: 10000 },
@@ -19,12 +15,11 @@ const cartaRestaurante = [
     { tipoProducto: "bebida", producto: "Coca cola", precio: 3500 },
     { tipoProducto: "bebida", producto: "Cerveza", precio: 5000 }
 ];
-let cartaEntradas = '';
-let pedido = [];
+
 
 menuInicial();
 if (confirmaPedido) {
-    alert("Su pedido se confirmo correctamente el valor a pagar es de $" + valorPagar + " COP");
+    alert("Su pedido se confirmo correctamente el valor a pagar es de $" + sumarPedido(pedido) + " COP");
 } else {
     alert("Gracias por utilizar nuestros servicios");
 }
@@ -41,6 +36,7 @@ function menuInicial() {
                 confirmaPedido = confirmarPedido();
                 break;
             case 3:
+                modificarPedido();
                 break;
             default:
                 if (opcionBienvenida !== 9) {
@@ -91,54 +87,24 @@ function agregarPedido() {
             agregarPedido();
             break;
     }
-    
-
-    // let opcionMenuPedido = parseInt(prompt("Menu del restaurante \n" +
-    //     "Seleccione la opcion que desea agregar al pedido\n" +
-    //     "1.Combo hamburguesa Sencilla .........................$18.000 COP \n" +
-    //     "2.Combo perro caliente sencillo ......................$16.000 COP \n" +
-    //     "3.Salchipapa .........................................$12.000 COP \n" +
-    //     "4.Coca cola ..........................................$ 3.000 COP \n" +
-    //     "5.Limonada ...........................................$ 4.000 COP"));
-
-    // switch (opcionMenuPedido) {
-    //     case 1:
-    //         sumarPedido(18000);
-    //         cuentaOpc1 = cuentaOpc1++;
-    //         break;
-    //     case 2:
-    //         sumarPedido(16000);
-    //         cuentaOpc2 = cuentaOpc2++;
-    //         break;
-    //     case 3:
-    //         sumarPedido(12000);
-    //         cuentaOpc3 = cuentaOpc3++;
-    //         break;
-    //     case 4:
-    //         sumarPedido(3000);
-    //         cuentaOpc4 = cuentaOpc4++;
-    //         break;
-    //     case 5:
-    //         sumarPedido(4000);
-    //         cuentaOpc5 = cuentaOpc5++;
-    //         break;
-    //     default:
-    //         alert("estimado usuari@ por favor Seleccione una opcion valida");
-    //         agregarPedido();
-    //         break;
-    // }
 
 }
 
 function confirmarPedido() {
     let _confirmoPedido = false;
-    let opcionConfirmar = 0;
-    if (valorPagar === 0) {
-        _confirmoPedido = false;
-        alert("estimado usuari@, usted no ha realizado ningun pedido aun");
-    } else {
+    const precioPedido = sumarPedido(pedido);
+
+    if (pedido.length > 0) {
+        console.log(pedido);
+        console.log(precioPedido);
+        let productosPedidos = 'PEDIDO REALIZADO \n'
         while (!_confirmoPedido) {
-            opcionConfirmar = parseInt(prompt("El total a pagar es de " + valorPagar +
+            
+            for (let i = 0; i < pedido.length; i++) {
+                productosPedidos = productosPedidos + pedido[i].producto + ' ............ ' + pedido[i].precio + '\n'
+            }
+            productosPedidos = productosPedidos + 'Costo Total ................... ' + precioPedido +'\n' 
+            opcionConfirmar = parseInt(prompt(productosPedidos + 
                 "\n Desea confirmar el pedido \n" +
                 "1.Si \n" +
                 "2.No "));
@@ -159,14 +125,17 @@ function confirmarPedido() {
                 break;
             }
         }
-
         return _confirmoPedido;
-    }
 
+    } else {
+        _confirmoPedido = false;
+        alert("estimado usuari@, usted no ha realizado ningun pedido aun");
+    }
 }
 
-function sumarPedido(valorPedido) {
-    valorPagar = valorPagar + valorPedido;
+function sumarPedido(arrayPedido) {
+    const precioPedido = arrayPedido.reduce((prev, current) => prev + current.precio, 0);
+    return precioPedido;
 }
 
 
@@ -207,4 +176,8 @@ function hacerPedido(arrayProd, opcionCarta) {
             agregarPedido();
             break;
     }
+}
+
+function modificarPedido(arrayPedido) {
+    
 }

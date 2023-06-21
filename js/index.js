@@ -48,7 +48,6 @@ function menuInicial() {
         if (confirmaPedido) {
             break;
         }
-        console.log(pedido);
     }
 }
 
@@ -95,29 +94,25 @@ function confirmarPedido() {
     const precioPedido = sumarPedido(pedido);
 
     if (pedido.length > 0) {
-        console.log(pedido);
-        console.log(precioPedido);
         let productosPedidos = 'PEDIDO REALIZADO \n'
         while (!_confirmoPedido) {
-            
+
             for (let i = 0; i < pedido.length; i++) {
                 productosPedidos = productosPedidos + pedido[i].producto + ' ............ ' + pedido[i].precio + '\n'
             }
-            productosPedidos = productosPedidos + 'Costo Total ................... ' + precioPedido +'\n' 
-            opcionConfirmar = parseInt(prompt(productosPedidos + 
+            productosPedidos = productosPedidos + 'Costo Total ................... ' + precioPedido + '\n'
+            opcionConfirmar = parseInt(prompt(productosPedidos +
                 "\n Desea confirmar el pedido \n" +
                 "1.Si \n" +
                 "2.No "));
             switch (opcionConfirmar) {
                 case 1:
-                    console.log("ingreso confirmar 1");
                     _confirmoPedido = true;
                     break;
                 case 2:
                     _confirmoPedido = false;
                     break;
                 default:
-                    console.log("default9 " + opcionConfirmar);
                     alert("estimado usuari@ por favor Seleccione una opcion valida");
                     break;
             }
@@ -178,6 +173,27 @@ function hacerPedido(arrayProd, opcionCarta) {
     }
 }
 
-function modificarPedido(arrayPedido) {
-    
+function modificarPedido() {
+    if (pedido.length > 0) {
+        let opcionEliminar = 0;
+        let productosPedidos = 'Seleccione la opción que desea eliminar del Pedido \n'
+        for (let i = 0; i < pedido.length; i++) {
+            productosPedidos = productosPedidos + (i + 1) + ' - ' + pedido[i].producto + ' ............ ' + pedido[i].precio + '\n'
+        }
+        opcionEliminar = parseInt(prompt(productosPedidos));
+
+        if (opcionEliminar > 0 && opcionEliminar <= pedido.length ) {
+            let productoEliminado = pedido[opcionEliminar-1];
+            pedido.splice((opcionEliminar - 1), 1);
+            alert(productoEliminado.producto + ', se ha eliminado correctamente del pedido');
+        } else {
+            alert('estimado usuari@, usted no ha seleccionado un producto valido para eliminar');
+            modificarPedido();
+        }
+        
+
+    } else {
+        alert("estimado usuari@, usted no ha realizado ningun pedido aun");
+    }
+
 }

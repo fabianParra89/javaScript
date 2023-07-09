@@ -3,26 +3,48 @@ let opcionBienvenida = 0;
 let confirmaPedido = false;
 let cartaEntradas = '';
 let pedido = [];
+let idProducto = 1;
 
-const cartaRestaurante = [
-    { tipoProducto: "entrada", producto: "canasta de empanadas", precio: 10000 },
-    { tipoProducto: "entrada", producto: "chicharrones apanados", precio: 9000 },
-    { tipoProducto: "entrada", producto: "totopos", precio: 9000 },
-    { tipoProducto: "rapida", producto: "hamburguesa sencilla", precio: 15000 },
-    { tipoProducto: "rapida", producto: "perro caliente sencillo", precio: 13000 },
-    { tipoProducto: "rapida", producto: "salchipapa", precio: 12000 },
-    { tipoProducto: "bebida", producto: "limonada", precio: 4000 },
-    { tipoProducto: "bebida", producto: "Coca cola", precio: 3500 },
-    { tipoProducto: "bebida", producto: "Cerveza", precio: 5000 }
-];
+const arrayCartaRestaurante = [];
 
-
-menuInicial();
-if (confirmaPedido) {
-    alert("Su pedido se confirmo correctamente el valor a pagar es de $" + sumarPedido(pedido) + " COP");
-} else {
-    alert("Gracias por utilizar nuestros servicios");
+class Producto{
+    constructor(id, tipoProducto, producto, precio, src){
+        this.id = id;
+        this.tipoProducto = tipoProducto;        
+        this.producto = producto;        
+        this.precio = precio;        
+        this.src = src;
+    }
 }
+
+
+
+const entrada1 = new Producto(idProducto++, "entrada", "CANASTA DE EMPANADAS", 8000, "./img/empanadas.png" );
+arrayCartaRestaurante.push(entrada1);
+const entrada2 = new Producto(idProducto++, "entrada", "CHICHARRONES APANADOS", 9000, "./img/chicharrones.png");
+arrayCartaRestaurante.push(entrada2);
+const entrada3 = new Producto(idProducto++, "entrada", "TOTOPOS", 9000, "./img/totopos.png");
+arrayCartaRestaurante.push(entrada3);
+const rapida1 = new Producto(idProducto++, "rapida", "HAMBURGUESA SENCILLA", 15000, "./img/totopos.png");
+arrayCartaRestaurante.push(rapida1);
+const rapida2 = new Producto(idProducto++, "rapida", "HOT DOG", 13000, "./img/totopos.png");
+arrayCartaRestaurante.push(rapida2);
+const rapida3 = new Producto(idProducto++, "rapida", "SALCHIPAPA", 12000, "./img/totopos.png");
+arrayCartaRestaurante.push(rapida3);
+const bebida1 = new Producto(idProducto++, "bebida", "LIMONADA", 4000, "./img/totopos.png");
+arrayCartaRestaurante.push(bebida1);
+const bebida2 = new Producto(idProducto++, "bebida", "COCA COLA", 3500, "./img/totopos.png");
+arrayCartaRestaurante.push(bebida2);
+const bebida3 = new Producto(idProducto++, "bebida", "CERVEZA", 5000, "./img/totopos.png");
+arrayCartaRestaurante.push(bebida3);
+
+console.log(arrayCartaRestaurante);
+// menuInicial();
+// if (confirmaPedido) {
+//     alert("Su pedido se confirmo correctamente el valor a pagar es de $" + sumarPedido(pedido) + " COP");
+// } else {
+//     alert("Gracias por utilizar nuestros servicios");
+// }
 
 
 function menuInicial() {

@@ -1,0 +1,84 @@
+/* reset */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+/* estilos header */
+.barra-nav {
+    background-color: #0e0c0d !important;
+}
+
+.barra-nav div {
+    display: flex;
+    justify-content: center !important;
+}
+
+.barra-nav div img{
+    border-radius: 10px;
+}
+
+.barra-menu {
+    padding: 0;
+    height: 100vh;
+    background-color: #ced4da;
+}
+
+.barra-menu div button {
+    border: none;
+}
+
+.titulo-menu {
+    background-color: #0e0c0d !important;
+    color: white !important;
+    font-weight: bold;
+}
+
+.contenedor-tarjetas{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+.tarjeta {
+    margin: 40px;
+    /* padding: 20px; */
+    width: 350px;
+    height: 420px;
+    display: flex;
+    flex-direction: column;
+    border: solid 1px #0e0c0d;
+    justify-content: space-between;
+    background-color:#f0f8ff ;
+    border-radius: 10px 10px 10px 10px ;
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+}
+
+.tarjeta img {
+    width: 280px;
+    margin: auto;
+}
+
+.info-Producto{
+    color: white;
+    padding: 0px 0px 5px 0px ;
+    display: flex;
+    flex-direction: column;
+    background-color: #0e0c0d;
+    align-items: center;
+    border-radius: 0 0 10px 10px;
+}
+
+.info-Producto span {
+    padding: 10px;
+}
+
+
+.info-Producto button {
+    padding: 5px 20px 5px 20px;
+    margin: 10px;
+    background-color: #ced4da;
+    border-radius: 5px;
+    font-weight: bold;
+    box-shadow: 8px 7px 13px -6px rgba(244,146,1,1);
+}

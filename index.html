@@ -14,23 +14,35 @@
 <body>
     <header>
         <!-- <div class="container"> -->
-            <nav class="navbar navbar-expand-lg bg-body-tertiary barra-nav">
-                <div class="container-fluid">
-                    <div class="col-3">
-                        <img src="./img/logo1.png" alt="cabrera">
-                    </div>
-                    <div class="col-9">
-                        <button id="ver-Pedido">pedido</button>
-                    </div>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary barra-nav">
+            <div class="container-fluid">
+                <div class="col-3 barra-nav-logo">
+                    <img src="./img/logo1.png" alt="cabrera">
                 </div>
-            </nav>
+                <div class="col-9 barra-nav-admin">
+                    <div class="precio-pedido">
+                        <div>
+                            <span>Precio del pedido</span>
+                        </div>
+                        <div>
+                            <span id="valor-pedido" class="dinero-pedido">$35000</span>
+                        </div> 
+                    </div>
+                    
+                    <span id="cantidad-productos" class="cantidad-pedido"> 11 </span>
+                    <button id="ver-Pedido" class="button-pedido">Ver pedido</button>
+                    <button id="confirma-pedido">confirmar pedido</button>
+                </div>
+            </div>
+        </nav>
         <!-- </div> -->
     </header>
     <main>
         <div class="row">
             <div class="col-3 barra-menu">
                 <div class="list-group">
-                    <button type="button" class="list-group-item list-group-item-action list-group-item-dark titulo-menu"
+                    <button type="button"
+                        class="list-group-item list-group-item-action list-group-item-dark titulo-menu"
                         disabled>MENU</button>
                     <button type="button" id="button-entrada"
                         class="list-group-item list-group-item-action list-group-item-dark">Entradas</button>
@@ -43,9 +55,14 @@
 
                 </div>
             </div>
-            <div id="app" class="col-9 contenedor-tarjetas">
-                <img src="./img/cabrera.png" alt="cabrera-cafe-Rest-Bar">
+            <div class="col-9">
+                <div id="tituloTipoProducto" class="contenedor-titulo">
+                </div>
+                <div id="app" class="contenedor-tarjetas">
+                    <!-- <img src="./img/cabrera.png" alt="cabrera-cafe-Rest-Bar"> -->
+                </div>
             </div>
+
         </div>
 
     </main>

@@ -1,13 +1,3 @@
-
-let opcionBienvenida = 0;
-let confirmaPedido = false;
-let cartaEntradas = '';
-let arrayPedido = JSON.parse(localStorage.getItem("pedido")) || [];
-let idProducto = 1;
-// let idPedido = 1;
-
-const arrayCartaRestaurante = [];
-
 class Producto {
     constructor(id, tipoProducto, producto, precio, src) {
         this.id = id;
@@ -16,7 +6,49 @@ class Producto {
         this.precio = precio;
         this.src = src;
     }
+    getProducto(){
+        return this.producto;
+    }
 }
+class Pedido{
+    constructor(){
+        this.productos = [];
+    }
+
+    addProducto(producto){
+        debugger
+        this.productos.push(producto);
+    }
+
+    getProductos(){
+        return this.productos
+    }
+    
+    sumarPedido() {
+        // this.productos
+        // const precioPedido = arrayPedido.getProductos()
+        return this.getProductos().reduce((prev, current) => prev + current.precio, 0);;
+    }
+}
+
+
+let opcionBienvenida = 0;
+let confirmaPedido = false;
+let cartaEntradas = '';
+let tmpArrayPedido = JSON.parse(localStorage.getItem("pedido")) || [];
+let arrayPedido = new Pedido();
+let idProducto = 1;
+// let idPedido = 1;
+
+
+
+const arrayCartaRestaurante = [];
+
+
+
+tmpArrayPedido.forEach(element => {
+    arrayPedido.addProducto(new Producto(element.id, element.tipoProducto, element.producto, element.precio, element.src));
+});
 
 const entrada1 = new Producto(idProducto++, "entrada", "CANASTA DE EMPANADAS", 8000, "./img/empanadas.png");
 arrayCartaRestaurante.push(entrada1);
@@ -41,7 +73,6 @@ arrayCartaRestaurante.push(bebida3);
 
 cantidadProductosPedido(arrayPedido);
 renderValorPedido(arrayPedido);
-
 
 
 const buttonEntrada = document.querySelector("#button-entrada");
@@ -130,7 +161,7 @@ function renderPedido(arrayPedido) {
     }else{
         console.log("Array pedido False")
     }
-    arrayPedido.length > 0 ?  tituloTipoProducto.innerText = `Su pedido se confirmo correctamente, el valor total a pagar es de ${sumarPedido(arrayPedido)}`: tituloTipoProducto.innerText = `Estimado cliente usted aun no ha realizado ningun pedido`;
+    arrayPedido.length > 0 ?  tituloTipoProducto.innerText = `Su pedido se confirmo correctamente, el valor total a pagar es de ${arrayPedido.sumarPedido()}`: tituloTipoProducto.innerText = `Estimado cliente usted aun no ha realizado ningun pedido`;
     
     contenedorTitulo.appendChild(tituloTipoProducto);
     console.log(arrayPedido);
@@ -144,7 +175,7 @@ function renderPedido(arrayPedido) {
                                 <img src="${element.src}" alt="${element.producto}">
                             </div>
                             <div class="col-4 confirma-divProducto">
-                                <span>${element.producto}</span>
+                                <span>${element.getProducto()}</span>
                             </div>
                             <div class="col-5 confirma-divPrecio">
                                 <span>$${element.precio}</span>
@@ -173,7 +204,7 @@ function selectProductos(tipoProducto) {
 
 function agregarPedido(producto) {
     // producto.idPedido = idPedido++;
-    arrayPedido.push(producto);
+    arrayPedido.addProducto(producto);
     localStorage.setItem("pedido", JSON.stringify(arrayPedido))
     cantidadProductosPedido(arrayPedido);
     renderValorPedido(arrayPedido);
@@ -194,20 +225,17 @@ function eliminarPedido(prodcuto, arrayPedido) {
 function cantidadProductosPedido(arrayPedido) {
     const cantidadProductos = document.querySelector("#cantidad-productos");
     cantidadProductos.innerHTML = "";
-    cantidadProductos.innerText = arrayPedido.length;
+    cantidadProductos.innerText = arrayPedido.getProductos().length;
 }
 
 function renderValorPedido(arrayPedido) {
     const valorPedido = document.querySelector("#valor-pedido");
     valorPedido.innerHTML = "";
-    valorPedido.innerHTML = "$" + sumarPedido(arrayPedido);
+    valorPedido.innerHTML = "$" + arrayPedido.sumarPedido();
 }
 
 
-function sumarPedido(arrayPedido) {
-    const precioPedido = arrayPedido.reduce((prev, current) => prev + current.precio, 0);
-    return precioPedido;
-}
+
 
 
 function filtroCartaProducto(array, tipoProducto) {

@@ -155,7 +155,7 @@ function renderPedido(arrayPedido) {
     })
 
     const buttonVolver = document.createElement("div");
-    buttonVolver.innerHTML = `<a class= "button-volver" href="./index.html" target="_blank">Volver</a>`
+    buttonVolver.innerHTML = `<a class= "button-volver" href="./index.html">Volver</a>`
     contenedorProductos.appendChild(buttonVolver);
 }
 

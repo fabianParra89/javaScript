@@ -90,6 +90,19 @@
     align-items: center;
 }
 
+
+.prducto-pedido {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #ffecb6;
+    margin: 5px;
+    border: solid 1px;
+    padding-right: 13px;
+    border-radius: 5px;
+}
+
 .titulo-contenedor {
     text-align: center;
     /* background-color: #ced4da;    */
@@ -143,7 +156,7 @@
 }
 
 .confirma-divImg {
-    
+
     text-align: right;
 }
 
@@ -158,11 +171,24 @@
 .confirma-divPrecio {
     text-align: left;
 }
-.container-producto{
+
+.container-producto {
     padding: 2px 0 2px 0 !important;
 }
 
-.button-volver{
+.container-buttons-pedido{
+    display: flex;
+    margin-top: 20px;
+    align-content: flex-start;
+    justify-content: center;
+}
+
+.valor-pagar{
+    font-weight: bold;
+    text-align: center;
+}
+
+.button-volver {
     padding: 5px 20px 5px 20px;
     border-radius: 5px;
     margin: 0 20px 0 0;
@@ -170,6 +196,21 @@
     text-decoration: none;
     color: #0e0c0d;
 }
-.button-volver:hover{
+
+.button-volver:hover {
     background-color: #adb5bd;
 }
+
+.button-borra {
+    width: 40px;
+    background-color: #ced4da;
+    padding: 5px;
+    border-radius: 15px;
+}
+
+.button-borra:hover {
+    background-color: #adb5bd;
+}
+
+
+

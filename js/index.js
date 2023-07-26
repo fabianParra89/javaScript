@@ -150,7 +150,9 @@ function selectProductos(tipoProducto) {
         pedido = true;
         arrayProductos = arrayPedido;
     } else {
+        console.log(arrayCartaRestaurante);
         arrayProductos = filtroCartaProducto(arrayCartaRestaurante, tipoProducto);
+        console.log(arrayProductos);
     }
     pedido ? renderPedido(arrayProductos, pedido) : renderProductos(tipoProducto, arrayProductos, pedido);
 }

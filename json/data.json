@@ -1,0 +1,20 @@
+[
+    {"id": 1, "tipoProdcuto": "entrada", "prodcuto": "CANASTA DE EMPANADAS", "precio": 8000 , "src":"./img/empanadas.png"},
+    {"id": 2, "tipoProdcuto": "entrada", "prodcuto": "CHICHARRONES APANADOS","precio": 10000, "src":"./img/chicharrones.png"},
+    {"id": 3,"tipoProducto":"entrada", "producto": "TOTOPOS","precio": 9000, "src":"./img/totopos.png"},
+    {"id": 4,"tipoProducto":"entrada", "producto": "CHINCHULINES","precio": 10000, "src":"./img/chinchulines.png"},
+    {"id": 5,"tipoProducto":"entrada", "producto": "QUESADILLAS","precio": 9000, "src":"./img/quesadillas.png"},
+    {"id": 6,"tipoProducto":"entrada", "producto": "DEDITOS DE QUESO","precio": 8000, "src":"./img/deditosQueso.png"},
+    {"id": 7,"tipoProducto":"rapida", "producto": "HAMBURGUESA SENCILLA","precio": 15000, "src":"./img/hamburguesa.png"},
+    {"id": 8,"tipoProducto":"rapida", "producto": "HOT DOG","precio": 13500, "src":"./img/hotDog.png"},
+    {"id": 9,"tipoProducto":"rapida", "producto": "SALCHIPAPA","precio": 13000, "src":"./img/salchipapa.png"},
+    {"id": 10,"tipoProducto":"rapida", "producto": "PIZZA PERSONAL","precio": 15000, "src":"./img/pizza.png"},
+    {"id": 11,"tipoProducto":"rapida", "producto": "BURRITOS","precio":15000 , "src":"./img/burritos.png"},
+    {"id": 12,"tipoProducto":"rapida", "producto": "PICADA MIXTA","precio": 18000, "src":"./img/picada.png"},
+    {"id": 13,"tipoProducto":"bebida", "producto": "LIMONADA","precio": 4000, "src":"./img/limonada.png"},
+    {"id": 14,"tipoProducto":"bebida", "producto": "COCA COLA","precio": 3500, "src":"./img/cocacola.png"},
+    {"id": 15,"tipoProducto":"bebida", "producto": "CERVEZA","precio": 4500, "src":"./img/cerveza.png"},
+    {"id": 16,"tipoProducto":"bebida", "producto": "JUGO NATURAL","precio": 4000, "src":"./img/jugoNatural.png"},
+    {"id": 17,"tipoProducto":"bebida", "producto": "COPA DE VINO","precio": 5000, "src":"./img/copaVino.png"},
+    {"id": 18,"tipoProducto":"bebida", "producto": "BOTELLA DE AGUA","precio": 2500, "src":"./img/agua.png"}
+]

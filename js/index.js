@@ -1,16 +1,20 @@
-import { Producto, inicializarProductos, filtroCartaProducto, cantidadProductosPedido, renderValorPedido, sumarPedido } from "./clases.js";
+import { filtroCartaProducto, cantidadProductosPedido, renderValorPedido, sumarPedido } from "./clases.js";
 
-let opcionBienvenida = 0;
-let confirmaPedido = false;
-let cartaEntradas = '';
 let arrayPedido = JSON.parse(localStorage.getItem("pedido")) || [];
 let idProducto = 1;
 // let idPedido = 1;
 
 const arrayCartaRestaurante = [];
 
-
-inicializarProductos(arrayCartaRestaurante, idProducto)
+fetch("./json/data.json")
+    .then((res) => res.json())
+    .then((data) => {
+        data.forEach(element => {
+            arrayCartaRestaurante.push(element)
+        });
+    })
+console.log(arrayCartaRestaurante);
+//inicializarProductos(arrayCartaRestaurante, idProducto)
 cantidadProductosPedido(arrayPedido);
 renderValorPedido(arrayPedido);
 const buttonEntrada = document.querySelector("#button-entrada");
@@ -31,7 +35,10 @@ buttonBebidas.addEventListener("click", () => {
 
 const buttonPedido = document.querySelector("#ver-Pedido");
 buttonPedido.addEventListener("click", () => {
-    app.innerHTML = "";
+    
+    const app = document.querySelector("#app");
+    console.log(app);
+     app.innerHTML = "";
     selectProductos("pedido");
 })
 
@@ -121,7 +128,7 @@ function renderPedido(arrayPedido, isPedido) {
 
     seccionButtonPedidos.classList.add("container-buttons-pedido");
     valorPagar.classList.add("valor-pagar");
-    buttonConfirmar.innerHTML = `<a id="button-confirmar" class= "button-volver" href="./index.html">Confirmar pedido</a>`;
+    buttonConfirmar.innerHTML = `<a id="button-confirmar" class= "button-volver" >Confirmar pedido</a>`;
     buttonVolver.innerHTML = `<a class= "button-volver" href="./index.html">Volver</a>`;
     valorPagar.innerHTML = `<span>Total a pagar $${sumarPedido(arrayPedido)}</span>`;
     seccionButtonPedidos.appendChild(buttonConfirmar);
@@ -131,6 +138,7 @@ function renderPedido(arrayPedido, isPedido) {
 
 
     buttonConfirmar.addEventListener("click", () => {
+
         confirmacionPedido(arrayPedido);
     })
 }
@@ -163,15 +171,6 @@ function agregarPedido(productoAgregado) {
         },
         onClick: function () { } // Callback after click
     }).showToast();
-
-
-    // Swal.fire({
-    //     position: 'bottom-end',
-    //     icon: 'success',
-    //     title: 'Se ha agregado ' + productoAgregado.producto + ' al pedido',
-    //     showConfirmButton: false,
-    //     timer: 2500
-    // })
     arrayPedido.push(productoAgregado);
     localStorage.setItem("pedido", JSON.stringify(arrayPedido))
     cantidadProductosPedido(arrayPedido);
@@ -187,7 +186,7 @@ function eliminarPedido(prodcutoEliminar, arrayPedido) {
     Swal.fire({
         title: 'Estas seguro?',
         text: "Vas a eliminar " + prodcutoEliminar.producto + " del pedido",
-       // icon: 'warning',
+        // icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#eb7c13',
         cancelButtonColor: '#0e0c0d',
@@ -231,19 +230,29 @@ function eliminarPedido(prodcutoEliminar, arrayPedido) {
 }
 
 function confirmacionPedido(arrayPedido) {
-    const contenedorPrincipal = document.querySelector("#app");
-    const pedidoConfirmado = document.createElement("div");
-    pedidoConfirmado.classList.add("valor-pagar");
-
-    pedidoConfirmado.innerHTML = `<p> Su pedido se ha confirmado correctamente!!! </p>`
-
+    
+    
+    const contenedorPrincipal = document.querySelector("#appPedido");
+    const contenedorTitulo = document.querySelector("#tituloTipoProducto");
+    contenedorPrincipal.innerText = "" ;
+    contenedorTitulo.innerText = "" ;
+    document.body.appendChild(contenedorPrincipal);
+    document.body.appendChild(contenedorTitulo);
+    Swal.fire({
+        title: ' Su pedido se ha confirmado correctamente!!!',
+        confirmButtonColor: '#eb7c13',
+        showClass: {
+          popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp'
+        }
+      })
     renderPedido(arrayPedido);
     arrayPedido = [];
     cantidadProductosPedido(arrayPedido);
     renderValorPedido(arrayPedido);
     localStorage.removeItem("pedido");
-
-    contenedorPrincipal.appendChild(pedidoConfirmado);
 }
 
 

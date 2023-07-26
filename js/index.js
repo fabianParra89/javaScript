@@ -33,7 +33,7 @@ buttonBebidas.addEventListener("click", () => {
 const buttonPedido = document.querySelector("#ver-Pedido");
 buttonPedido.addEventListener("click", () => {
 
-    const app = document.querySelector("#app");
+    //const app = document.querySelector("#app");
     app.innerHTML = "";
     selectProductos("pedido");
 })

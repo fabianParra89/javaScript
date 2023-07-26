@@ -1,6 +1,6 @@
 [
-    {"id": 1, "tipoProducto": "entrada", "prodcuto": "CANASTA DE EMPANADAS", "precio": 8000 , "src":"./img/empanadas.png"},
-    {"id": 2, "tipoProducto": "entrada", "prodcuto": "CHICHARRONES APANADOS","precio": 10000, "src":"./img/chicharrones.png"},
+    {"id": 1, "tipoProducto": "entrada", "producto": "CANASTA DE EMPANADAS", "precio": 8000 , "src":"./img/empanadas.png"},
+    {"id": 2, "tipoProducto": "entrada", "producto": "CHICHARRONES APANADOS","precio": 10000, "src":"./img/chicharrones.png"},
     {"id": 3,"tipoProducto":"entrada", "producto": "TOTOPOS","precio": 9000, "src":"./img/totopos.png"},
     {"id": 4,"tipoProducto":"entrada", "producto": "CHINCHULINES","precio": 10000, "src":"./img/chinchulines.png"},
     {"id": 5,"tipoProducto":"entrada", "producto": "QUESADILLAS","precio": 9000, "src":"./img/quesadillas.png"},

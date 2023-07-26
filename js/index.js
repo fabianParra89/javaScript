@@ -77,7 +77,8 @@ function renderProductos(tipoProducto, arrayProductos, isPedido) {
     });
 }
 
-function renderPedido(arrayPedido, isPedido) {
+function renderPedido(arrayPedidoRender, isPedido) {
+    console.log(arrayPedidoRender, isPedido, "render");
     const contenedorTitulo = document.querySelector("#tituloTipoProducto");
     const contenedorProductos = document.querySelector("#appPedido");
     contenedorProductos.innerHTML = "";
@@ -89,7 +90,7 @@ function renderPedido(arrayPedido, isPedido) {
     if (arrayPedido.length > 0) {
         tituloTipoProducto.innerText = `PEDIDO REALIZADO`
         contenedorTitulo.appendChild(tituloTipoProducto);
-        arrayPedido.forEach(element => {
+        arrayPedidoRender.forEach(element => {
             const productosConfirma = document.createElement("div");
             productosConfirma.classList.add("prducto-pedido");
             productosConfirma.innerHTML = `
@@ -109,7 +110,7 @@ function renderPedido(arrayPedido, isPedido) {
             buttonBorrar.classList.add("button-borra");
             buttonBorrar.src = "./img/borrar.png";
             buttonBorrar.addEventListener("click", () => {
-                isPedido ? eliminarPedido(element, arrayPedido) : agregarPedido(element);
+                eliminarPedido(element, arrayPedidoRender)
             })
             productosConfirma.appendChild(buttonBorrar);
             contenedorProductos.appendChild(productosConfirma);
@@ -124,7 +125,7 @@ function renderPedido(arrayPedido, isPedido) {
         valorPagar.classList.add("valor-pagar");
         buttonConfirmar.innerHTML = `<a id="button-confirmar" class= "button-volver" >Confirmar pedido</a>`;
         buttonVolver.innerHTML = `<a class= "button-volver" href="./index.html">Volver</a>`;
-        valorPagar.innerHTML = `<span>Total a pagar $${sumarPedido(arrayPedido)}</span>`;
+        valorPagar.innerHTML = `<span>Total a pagar $${sumarPedido(arrayPedidoRender)}</span>`;
         seccionButtonPedidos.appendChild(buttonConfirmar);
         seccionButtonPedidos.appendChild(buttonVolver);
         contenedorProductos.appendChild(valorPagar);
@@ -133,20 +134,38 @@ function renderPedido(arrayPedido, isPedido) {
 
         buttonConfirmar.addEventListener("click", () => {
 
-            confirmacionPedido(arrayPedido);
+            confirmacionPedido(arrayPedidoRender);
         })
     } else {
-        Swal.fire({
-            icon: 'error',
-            title: ' Estimado cliente no hay ningun producto en su pedido',
-            confirmButtonColor: '#eb7c13',
-            showClass: {
-                popup: 'animate__animated animate__fadeInDown'
-            },
-            hideClass: {
-                popup: 'animate__animated animate__fadeOutUp'
-            }
-        })
+        if (isPedido) {
+            Swal.fire({
+                icon: 'error',
+                title: ' Estimado cliente no hay ningun producto en su pedido',
+                confirmButtonColor: '#eb7c13',
+                showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                }
+            })
+
+            
+        } else {
+            Swal.fire({
+                title: ' Su pedido se ha confirmado correctamente!!!',
+                confirmButtonColor: '#eb7c13',
+                showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                }
+            })
+            
+
+        }
+
     }
 }
 
@@ -155,10 +174,12 @@ function selectProductos(tipoProducto) {
     let arrayProductos
     if (tipoProducto === "pedido") {
         pedido = true;
-        arrayProductos = arrayPedido;
+        // arrayProductos = arrayPedido;
+        arrayProductos = JSON.parse(localStorage.getItem("pedido")) || [];
     } else {
         arrayProductos = filtroCartaProducto(arrayCartaRestaurante, tipoProducto);
     }
+    console.log(arrayProductos);
     pedido ? renderPedido(arrayProductos, pedido) : renderProductos(tipoProducto, arrayProductos, pedido);
 }
 
@@ -176,6 +197,7 @@ function agregarPedido(productoAgregado) {
         },
         onClick: function () { } // Callback after click
     }).showToast();
+    arrayPedido = JSON.parse(localStorage.getItem("pedido")) || [];
     arrayPedido.push(productoAgregado);
     localStorage.setItem("pedido", JSON.stringify(arrayPedido))
     cantidadProductosPedido(arrayPedido);
@@ -186,7 +208,7 @@ function agregarPedido(productoAgregado) {
 
 
 
-function eliminarPedido(prodcutoEliminar, arrayPedido) {
+function eliminarPedido(prodcutoEliminar, arrayPedidoEliminar) {
 
     Swal.fire({
         title: 'Estas seguro?',
@@ -203,13 +225,13 @@ function eliminarPedido(prodcutoEliminar, arrayPedido) {
         imageAlt: prodcutoEliminar.producto
     }).then((result) => {
         if (result.isConfirmed) {
-            let index = arrayPedido.indexOf(prodcutoEliminar);
-            index != -1 && arrayPedido.splice(index, 1);
+            let index = arrayPedidoEliminar.indexOf(prodcutoEliminar);
+            index != -1 && arrayPedidoEliminar.splice(index, 1);
             localStorage.removeItem("pedido");
-            localStorage.setItem("pedido", JSON.stringify(arrayPedido));
+            localStorage.setItem("pedido", JSON.stringify(arrayPedidoEliminar));
             selectProductos("pedido");
-            cantidadProductosPedido(arrayPedido);
-            renderValorPedido(arrayPedido);
+            cantidadProductosPedido(arrayPedidoEliminar);
+            renderValorPedido(arrayPedidoEliminar);
 
             Toastify({
                 text: "Se ha eliminado del pedido el producto: " + prodcutoEliminar.producto,
@@ -229,30 +251,18 @@ function eliminarPedido(prodcutoEliminar, arrayPedido) {
 
 }
 
-function confirmacionPedido(arrayPedido) {
-
-
-    const contenedorPrincipal = document.querySelector("#appPedido");
-    const contenedorTitulo = document.querySelector("#tituloTipoProducto");
-    contenedorPrincipal.innerText = "";
-    contenedorTitulo.innerText = "";
-    document.body.appendChild(contenedorPrincipal);
-    document.body.appendChild(contenedorTitulo);
-    Swal.fire({
-        title: ' Su pedido se ha confirmado correctamente!!!',
-        confirmButtonColor: '#eb7c13',
-        showClass: {
-            popup: 'animate__animated animate__fadeInDown'
-        },
-        hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-        }
-    })
-    renderPedido(arrayPedido);
+function confirmacionPedido(arrayPedidoConfirmar) {
+    // const contenedorPrincipal = document.querySelector("#appPedido");
+    //const contenedorTitulo = document.querySelector("#tituloTipoProducto");
+    //contenedorPrincipal.innerText = "";
+    //contenedorTitulo.innerText = "";
+    //document.body.appendChild(contenedorPrincipal);
+    //document.body.appendChild(contenedorTitulo);
     arrayPedido = [];
     cantidadProductosPedido(arrayPedido);
     renderValorPedido(arrayPedido);
     localStorage.removeItem("pedido");
+    renderPedido(arrayPedido, false);
 }
 
 
